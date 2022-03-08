@@ -1,11 +1,20 @@
-# Creating a binary search tree
-
 # Tree Node class
 class Node():
     def __init__(self, value):
         self.left = None
         self.right = None
         self.value = value
+
+def dfsTraversal(root: Node):
+    if root == None:
+        return[]
+    
+    l = []    
+    l+=dfsTraversal(root.left)
+    l.append(root.value)
+    l+=dfsTraversal(root.right)
+    return(l)
+
 
 class BinarySearchTree():
     def __init__(self):
@@ -31,28 +40,12 @@ class BinarySearchTree():
                         break
                     currentNode = currentNode.right
 
-    # Method - Lookup
-    def lookup(self, value):
-        if self.root == None:
-            return False
-        else:
-            currentNode = self.root
-            while(currentNode):
-                if value < currentNode.value:
-                    currentNode = currentNode.left
-                elif value > currentNode.value:
-                    currentNode = currentNode.right
-                elif currentNode.value == value:
-                    return True
-        return False
-
 bst = BinarySearchTree()
-
 bst.insert(10)
 bst.insert(14)
 bst.insert(16)
 bst.insert(8)
+bst.insert(9)
 bst.insert(5)
 
-# print(bst.lookup())
-print(bst)
+print(dfsTraversal(bst.root))
